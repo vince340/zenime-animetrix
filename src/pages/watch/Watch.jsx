@@ -82,9 +82,7 @@ export default function Watch() {
 
   useEffect(() => {
     if (totalEpisodes !== null) {
-      if (totalEpisodes === 0 && (!streamInfo || streamInfo.length === 0)) {
-        navigate(`/404-not-found`);
-      } else if (totalEpisodes === 0) {
+      if (totalEpisodes === 0) {
         navigate(`/${animeId}`);
       }
     }
@@ -229,17 +227,19 @@ export default function Watch() {
                   </div>
                 )}
                 {!buffering && !streamUrl && (
-                <p className="text-center underline font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                  Probably this server is down ,try other servers<br />
-                  Either reload or try again after sometime
-                </p>
-                 )} 
+                  <p className="text-center underline font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                    Probably this server is down ,try other servers
+                    <br />
+                    Either reload or try again after sometime
+                  </p>
+                )}
                 {!buffering && !streamUrl && !servers && (
-                <p className="text-center underline font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                  Probably streaming server is down<br />
-                  Either reload or try again after sometime
-                </p>
-                 )} 
+                  <p className="text-center underline font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                    Probably streaming server is down
+                    <br />
+                    Either reload or try again after sometime
+                  </p>
+                )}
               </div>
               {!buffering && (
                 <Watchcontrols
