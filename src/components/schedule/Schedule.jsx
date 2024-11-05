@@ -9,14 +9,13 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import "./schedule.css";
 import { Link } from "react-router-dom";
 
-const Schedule = (data) => {
+const Schedule = () => {
   const [dates, setDates] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showAll, setShowAll] = useState(false);
   const [currentActiveIndex, setCurrentActiveIndex] = useState(null);
-  const datas = data;
-  const [scheduleData, setscheduleData] = useState(datas.data.schedule);
+  const [scheduleData, setscheduleData] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date());
   const cardRefs = useRef([]);
   const swiperRef = useRef(null);
