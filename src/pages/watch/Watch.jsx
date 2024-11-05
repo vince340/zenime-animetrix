@@ -210,7 +210,11 @@ export default function Watch() {
             </div>
             <div className="player w-full h-fit bg-black flex flex-col">
               <div className="w-full relative h-[480px] max-[1400px]:h-[40vw] max-[1200px]:h-[48vw] max-[1024px]:h-[58vw] max-[600px]:h-[65vw]">
-                {!buffering ? (
+                {buffering ? (
+                  <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
+                    <BouncingLoader />
+                  </div>
+                ) : streamUrl ? (
                   <Player
                     streamUrl={streamUrl}
                     subtitles={subtitles}
@@ -222,25 +226,14 @@ export default function Watch() {
                     episodeId={episodeId}
                   />
                 ) : (
-                  <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
-                    <BouncingLoader />
-                  </div>
-                )}
-                {!buffering && !streamUrl && (
                   <p className="text-center underline font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                    Probably this server is down ,try other servers
+                    Probably this server is down, try other servers
                     <br />
-                    Either reload or try again after sometime
-                  </p>
-                )}
-                {!buffering && !streamUrl && !servers && (
-                  <p className="text-center underline font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                    Probably streaming server is down
-                    <br />
-                    Either reload or try again after sometime
+                    Either reload or try again after some time
                   </p>
                 )}
               </div>
+
               {!buffering && (
                 <Watchcontrols
                   autoPlay={autoPlay}

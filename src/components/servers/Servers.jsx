@@ -22,21 +22,20 @@ function Servers({
         <div className="w-full h-full rounded-lg flex justify-center items-center max-[600px]:rounded-none">
           <BouncingLoader />
         </div>
-      ) : (
+      ) : servers?.length > 0 ? (
         <div className="w-full h-full rounded-lg grid grid-cols-[minmax(0,30%),minmax(0,70%)] overflow-hidden max-[800px]:grid-cols-[minmax(0,40%),minmax(0,60%)] max-[600px]:flex max-[600px]:flex-col max-[600px]:rounded-none">
           <div className="h-full bg-[#ffbade] px-6 text-black flex flex-col justify-center items-center gap-y-2 max-[600px]:bg-transparent max-[600px]:h-1/2 max-[600px]:text-white max-[600px]:mb-4">
             <p className="text-center leading-5 font-medium text-[14px]">
               You are watching <br />
-              <span className="font-semibold  max-[600px]:text-[#ffbade]">
+              <span className="font-semibold max-[600px]:text-[#ffbade]">
                 Episode {activeEpisodeNum}
               </span>
             </p>
             <p className="leading-5 text-[14px] font-medium text-center">
-              If the current server doesn&apos;t work, please try other servers
-              beside.
+              If the current server doesn&apos;t work, please try other servers beside.
             </p>
           </div>
-          <div className="bg-[#201F31] flex flex-col max-[600px]:h-full ">
+          <div className="bg-[#201F31] flex flex-col max-[600px]:h-full">
             {subServers.length > 0 && (
               <div
                 className={`servers px-2 flex items-center flex-wrap ml-2 max-[600px]:py-2 ${
@@ -54,14 +53,12 @@ function Servers({
                   {subServers.map((item, index) => (
                     <div
                       key={index}
-                      className={` px-6 py-[5px] rounded-lg cursor-pointer ${
+                      className={`px-6 py-[5px] rounded-lg cursor-pointer ${
                         activeServerId === item?.data_id
                           ? "bg-[#ffbade] text-black"
                           : "bg-[#373646] text-white"
                       } max-[700px]:px-3`}
-                      onClick={() => {
-                        setActiveServerId(item?.data_id);
-                      }}
+                      onClick={() => setActiveServerId(item?.data_id)}
                     >
                       <p className="text-[13px] font-semibold">
                         {item.serverName}
@@ -88,7 +85,7 @@ function Servers({
                   {dubServers.map((item, index) => (
                     <div
                       key={index}
-                      className={` px-6 py-[5px] rounded-lg cursor-pointer ${
+                      className={`px-6 py-[5px] rounded-lg cursor-pointer ${
                         activeServerId === item?.data_id
                           ? "bg-[#ffbade] text-black"
                           : "bg-[#373646] text-white"
@@ -105,8 +102,7 @@ function Servers({
             )}
           </div>
         </div>
-      )}
-      {!serverLoading && !servers && (
+      ) : (
         <p className="text-center font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
           Could not load servers <br />
           Either reload or try again after sometime
