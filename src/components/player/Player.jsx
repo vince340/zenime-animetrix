@@ -54,7 +54,7 @@ export default function Player({
 }) {
   const artRef = useRef(null);
   const proxy = import.meta.env.VITE_PROXY_URL;
-  const m3u8proxy = import.meta.env.VITE_M3U8_PROXY_URL;
+  const m3u8proxy = import.meta.env.VITE_M3U8_PROXY_URL.split(",");
   const [playerProgress, setPlayerProgress] = useState(0);
   useEffect(() => {
     setPlayerProgress(0);
@@ -167,7 +167,7 @@ export default function Player({
     if (!streamUrl || !artRef.current) return;
 
     const art = new Artplayer({
-      url: m3u8proxy + streamUrl,
+      url: m3u8proxy[Math.floor(Math.random() * m3u8proxy.length)] + streamUrl,
       container: artRef.current,
       type: "m3u8",
       autoplay: autoPlay,
