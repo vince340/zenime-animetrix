@@ -57,7 +57,7 @@ export default function getChapterStyles(intro, outro) {
       outro.end === 0
     ) {
       styles += `
-                .art-chapter:nth-child(1) {
+                .art-chapter:nth-child(2) {
                     background-color: #fdd253;
                     transform: scaleY(0.6);
                 }
