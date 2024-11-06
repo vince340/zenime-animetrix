@@ -226,20 +226,23 @@ export default function Watch() {
                     <BouncingLoader />
                   </div>
                 )}
-                {!buffering && !streamInfo && (
-                  <p className="text-center underline font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                    Probably this server is down ,try other servers
-                    <br />
-                    Either reload or try again after sometime
-                  </p>
-                )}
-                {!buffering && !streamInfo && !servers && (
-                  <p className="text-center underline font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                    Probably streaming server is down
-                    <br />
-                    Either reload or try again after sometime
-                  </p>
-                )}
+                <p className="text-center underline font-medium text-[15px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                  {!buffering && !streamInfo ? (
+                    servers ? (
+                      <>
+                        Probably this server is down, try other servers
+                        <br />
+                        Either reload or try again after sometime
+                      </>
+                    ) : (
+                      <>
+                        Probably streaming server is down
+                        <br />
+                        Either reload or try again after sometime
+                      </>
+                    )
+                  ) : null}
+                </p>
               </div>
 
               {!buffering && (
