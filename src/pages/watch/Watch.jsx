@@ -33,7 +33,7 @@ export default function Watch() {
   const { homeInfo } = useHomeInfo();
   const [showNextEpisodeSchedule, setShowNextEpisodeSchedule] = useState(true);
   const {
-    error,
+    // error,
     buffering,
     streamInfo,
     animeInfo,
