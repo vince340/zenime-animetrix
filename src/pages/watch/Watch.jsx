@@ -89,12 +89,32 @@ export default function Watch() {
   }, [streamInfo, episodeId, animeId, totalEpisodes]);
 
   useEffect(() => {
+    if (animeId) {
+      const newEpisodeId = queryParams.get("ep");
+      if (!newEpisodeId && episodes && episodes.length > 0) {
+        const firstEpisodeId = episodes[0].id.match(/ep=(\d+)/)?.[1];
+        setEpisodeId(firstEpisodeId);
+        window.history.replaceState(
+          {},
+          "",
+          `/watch/${animeId}?ep=${firstEpisodeId}`
+        );
+      } else {
+        setEpisodeId(newEpisodeId);
+        window.history.replaceState(
+          {},
+          "",
+          `/watch/${animeId}?ep=${newEpisodeId}`
+        );
+      }
+    }
+  }, [animeId, episodes]);
+  useEffect(() => {
     if (episodeId) {
       const newUrl = `/watch/${animeId}?ep=${episodeId}`;
       window.history.pushState({}, "", newUrl);
     }
-  }, [episodeId, animeId]);
-
+  }, [episodeId]);
   useEffect(() => {
     const adjustHeight = () => {
       if (window.innerWidth > 1200) {
