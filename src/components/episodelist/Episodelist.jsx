@@ -220,13 +220,19 @@ function Episodelist({
                     <div
                       key={item?.id}
                       ref={isActive ? activeEpisodeRef : null}
-                      className={`flex items-center justify-center rounded-[3px] h-[30px] text-[13.5px] font-medium cursor-pointer ${
-                        isActive
-                          ? "bg-[#ffbade] text-black"
-                          : "bg-[#35373D] text-gray-400"
-                      } ${
-                        isSearched ? "glow-animation" : ""
-                      } md:hover:bg-[#67686F] md:hover:text-white`}
+                      className={`flex items-center justify-center rounded-[3px] h-[30px] text-[13.5px] font-medium cursor-pointer group ${
+                        item?.filler
+                          ? isActive
+                            ? "bg-[#ffbade]"
+                            : "bg-gradient-to-r from-[#5a4944] to-[#645a4b]"
+                          : ""
+                      } md:hover:bg-[#67686F] 
+                          md:hover:text-white
+                       ${
+                         isActive
+                           ? "bg-[#ffbade] text-black"
+                           : "bg-[#35373D] text-gray-400"
+                       } ${isSearched ? "glow-animation" : ""} `}
                       onClick={() => {
                         if (episodeNumber) {
                           onEpisodeClick(episodeNumber);
@@ -235,7 +241,15 @@ function Episodelist({
                         }
                       }}
                     >
-                      {index + selectedRange[0]}
+                      <span
+                        className={`${
+                          item?.filler
+                            ? "text-white md:group-hover:text-[#ffbade]"
+                            : ""
+                        }`}
+                      >
+                        {index + selectedRange[0]}
+                      </span>
                     </div>
                   );
                 })
