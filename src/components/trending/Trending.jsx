@@ -55,7 +55,6 @@ const Trending = ({ trending }) => {
                       alt={item.title}
                       className="block w-full h-full object-cover hover:cursor-pointer"
                       title={item.title}
-                      loading="lazy"
                     />
                   </Link>
                 </div>

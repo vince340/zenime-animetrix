@@ -135,7 +135,6 @@ const CategoryCard = React.memo(
                       <img
                         src={item.poster}
                         alt={item.title}
-                        loading="lazy"
                         className={`w-full h-[320px] object-cover max-[1200px]:h-[35vw] max-[758px]:h-[45vw] max-[478px]:h-[60vw] group-hover:blur-[7px] transform transition-all duration-300 ease-in-out ultra-wide:h-[400px] ${cardStyle}`}
                       />
                     </div>
@@ -243,7 +242,6 @@ const CategoryCard = React.memo(
                     <img
                       src={item.poster}
                       alt={item.title}
-                      loading="lazy"
                       className={`w-full h-[250px] object-cover max-[1200px]:h-[35vw] max-[758px]:h-[45vw] max-[478px]:h-[60vw] ${cardStyle} group-hover:blur-[7px] transform transition-all duration-300 ease-in-out `}
                     />
                   </div>

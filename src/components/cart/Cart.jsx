@@ -46,7 +46,6 @@ function Cart({ label, data, path }) {
                 src={item.poster}
                 alt={item.title}
                 className="flex-shrink-0 w-[60px] h-[75px] rounded-md object-cover cursor-pointer"
-                loading="lazy"
                 onClick={() => navigate(`/watch/${item.id}`)}
                 onMouseEnter={() => handleMouseEnter(item)}
                 onMouseLeave={handleMouseLeave}
