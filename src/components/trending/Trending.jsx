@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useLanguage } from "@/src/context/LanguageContext";
 import { Link, useNavigate } from "react-router-dom";
+import LazyLoad from "react-lazy-load";
 
 const Trending = ({ trending }) => {
   const { language } = useLanguage();
@@ -50,12 +51,14 @@ const Trending = ({ trending }) => {
                     to={`/${item.id}`}
                     className="inline-block bg-[#2a2c31] absolute w-auto left-[40px] right-0 top-0 bottom-0 max-[575px]:left-0 max-[575px]:top-0 max-[575px]:bottom-0"
                   >
-                    <img
-                      src={item.poster}
-                      alt={item.title}
-                      className="block w-full h-full object-cover hover:cursor-pointer"
-                      title={item.title}
-                    />
+                    <LazyLoad threshold={0.8} offset={70}>
+                      <img
+                        src={item.poster}
+                        alt={item.title}
+                        className="block w-full h-full object-cover hover:cursor-pointer"
+                        title={item.title}
+                      />
+                    </LazyLoad>
                   </Link>
                 </div>
               </SwiperSlide>

@@ -11,6 +11,7 @@ import { useLanguage } from "@/src/context/LanguageContext";
 import { Link, useNavigate } from "react-router-dom";
 import Qtip from "../qtip/Qtip";
 import useToolTipPosition from "@/src/hooks/useToolTipPosition";
+import LazyLoad from "react-lazy-load";
 
 const CategoryCard = React.memo(
   ({
@@ -132,11 +133,13 @@ const CategoryCard = React.memo(
 
                     <div className="overlay"></div>
                     <div className="overflow-hidden">
-                      <img
-                        src={item.poster}
-                        alt={item.title}
-                        className={`w-full h-[320px] object-cover max-[1200px]:h-[35vw] max-[758px]:h-[45vw] max-[478px]:h-[60vw] group-hover:blur-[7px] transform transition-all duration-300 ease-in-out ultra-wide:h-[400px] ${cardStyle}`}
-                      />
+                      <LazyLoad threshold={0.5} offset={70}>
+                        <img
+                          src={item.poster}
+                          alt={item.title}
+                          className={`w-full h-[320px] object-cover max-[1200px]:h-[35vw] max-[758px]:h-[45vw] max-[478px]:h-[60vw] group-hover:blur-[7px] transform transition-all duration-300 ease-in-out ultra-wide:h-[400px] ${cardStyle}`}
+                        />
+                      </LazyLoad>
                     </div>
                     {(item.tvInfo?.rating === "18+" ||
                       item?.adultContent === true) && (
@@ -236,14 +239,15 @@ const CategoryCard = React.memo(
                       className="text-[40px] text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[10000]"
                     />
                   )}
-
                   <div className="overlay"></div>
                   <div className="overflow-hidden">
-                    <img
-                      src={item.poster}
-                      alt={item.title}
-                      className={`w-full h-[250px] object-cover max-[1200px]:h-[35vw] max-[758px]:h-[45vw] max-[478px]:h-[60vw] ${cardStyle} group-hover:blur-[7px] transform transition-all duration-300 ease-in-out `}
-                    />
+                    <LazyLoad threshold={0.5} offset={70}>
+                      <img
+                        src={item.poster}
+                        alt={item.title}
+                        className={`w-full h-[250px] object-cover max-[1200px]:h-[35vw] max-[758px]:h-[45vw] max-[478px]:h-[60vw] ${cardStyle} group-hover:blur-[7px] transform transition-all duration-300 ease-in-out `}
+                      />
+                    </LazyLoad>
                   </div>
                   {(item.tvInfo?.rating === "18+" ||
                     item?.adultContent === true) && (
