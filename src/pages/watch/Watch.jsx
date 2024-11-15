@@ -57,8 +57,14 @@ export default function Watch() {
     servers,
     serverLoading,
   } = useWatch(animeId, initialEpisodeId);
-  const { autoPlay, setAutoPlay, autoSkipIntro, setAutoSkipIntro } =
-    useWatchControl();
+  const {
+    autoPlay,
+    setAutoPlay,
+    autoSkipIntro,
+    setAutoSkipIntro,
+    autoNext,
+    setAutoNext,
+  } = useWatchControl();
   useEffect(() => {
     if (!initialEpisodeId && episodes && episodes.length > 0 && !episodeId) {
       const firstEpisodeId = episodes[0].id.match(/ep=(\d+)/)?.[1];
@@ -239,7 +245,10 @@ export default function Watch() {
                     thumbnail={thumbnail}
                     autoSkipIntro={autoSkipIntro}
                     autoPlay={autoPlay}
+                    autoNext={autoNext}
                     episodeId={episodeId}
+                    episodes={episodes}
+                    playNext={(id) => setEpisodeId(id)}
                   />
                 ) : (
                   <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -271,6 +280,8 @@ export default function Watch() {
                   setAutoPlay={setAutoPlay}
                   autoSkipIntro={autoSkipIntro}
                   setAutoSkipIntro={setAutoSkipIntro}
+                  autoNext={autoNext}
+                  setAutoNext={setAutoNext}
                   episodes={episodes}
                   totalEpisodes={totalEpisodes}
                   episodeId={episodeId}

@@ -20,6 +20,8 @@ export default function WatchControls({
   setAutoPlay,
   autoSkipIntro,
   setAutoSkipIntro,
+  autoNext,
+  setAutoNext,
   episodeId,
   episodes = [],
   onButtonClick,
@@ -51,6 +53,11 @@ export default function WatchControls({
           label="auto skip intro"
           isActive={autoSkipIntro}
           onClick={() => setAutoSkipIntro((prev) => !prev)}
+        />
+        <ToggleButton
+          label="auto next"
+          isActive={autoNext}
+          onClick={() => setAutoNext((prev) => !prev)}
         />
       </div>
       <div className="flex gap-x-6 max-[575px]:gap-x-4 max-[375px]:justify-end">

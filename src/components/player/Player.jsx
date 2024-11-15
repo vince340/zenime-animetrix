@@ -50,15 +50,31 @@ export default function Player({
   outro,
   autoSkipIntro,
   autoPlay,
+  autoNext,
   episodeId,
+  episodes,
+  playNext,
 }) {
   const artRef = useRef(null);
   const proxy = import.meta.env.VITE_PROXY_URL;
   const m3u8proxy = import.meta.env.VITE_M3U8_PROXY_URL.split(",");
   const [playerProgress, setPlayerProgress] = useState(0);
+  const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(
+    episodes?.findIndex(
+      (episode) => episode.id.match(/ep=(\d+)/)?.[1] === episodeId
+    )
+  );
   useEffect(() => {
     setPlayerProgress(0);
   }, [episodeId]);
+  useEffect(() => {
+    if (episodes?.length > 0) {
+      const newIndex = episodes.findIndex(
+        (episode) => episode.id.match(/ep=(\d+)/)?.[1] === episodeId
+      );
+      setCurrentEpisodeIndex(newIndex);
+    }
+  }, [episodeId, episodes]);
   useEffect(() => {
     const applyChapterStyles = () => {
       const existingStyles = document.querySelectorAll(
@@ -90,11 +106,43 @@ export default function Player({
       art.hls = hls;
 
       art.on("destroy", () => hls.destroy());
-      hls.on(Hls.Events.ERROR, (event, data) => {
-        console.error("HLS.js error:", data);
+
+      // hls.on(Hls.Events.ERROR, (event, data) => {
+      //   console.error("HLS.js error:", data);
+      // });
+      video.addEventListener("timeupdate", () => {
+        const currentTime = Math.round(video.currentTime);
+        const duration = Math.round(video.duration);
+        if (duration > 0) {
+          if (currentTime >= duration) {
+            console.log("video ended");
+            art.pause();
+            if (currentEpisodeIndex < episodes?.length - 1 && autoNext) {
+              playNext(
+                episodes[currentEpisodeIndex + 1].id.match(/ep=(\d+)/)?.[1]
+              );
+            }
+          }
+        }
+      });
+      video.addEventListener("ended", () => {
+        console.log("Stream has ended.");
       });
     } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
       video.src = url;
+
+      video.addEventListener("timeupdate", () => {
+        const currentTime = video.currentTime;
+        const duration = video.duration;
+        if (duration > 0) {
+          const progressPercentage = (currentTime / duration) * 100;
+          console.log(`Progress: ${progressPercentage.toFixed(2)}%`);
+        }
+      });
+
+      video.addEventListener("ended", () => {
+        console.log("Stream has ended.");
+      });
     } else {
       art.notice.show("Unsupported playback format: m3u8");
     }
