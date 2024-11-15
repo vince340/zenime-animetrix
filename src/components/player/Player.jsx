@@ -115,7 +115,6 @@ export default function Player({
         const duration = Math.round(video.duration);
         if (duration > 0) {
           if (currentTime >= duration) {
-            console.log("video ended");
             art.pause();
             if (currentEpisodeIndex < episodes?.length - 1 && autoNext) {
               playNext(
@@ -125,26 +124,24 @@ export default function Player({
           }
         }
       });
-      video.addEventListener("ended", () => {
-        console.log("Stream has ended.");
-      });
     } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
       video.src = url;
-
       video.addEventListener("timeupdate", () => {
-        const currentTime = video.currentTime;
-        const duration = video.duration;
+        const currentTime = Math.round(video.currentTime);
+        const duration = Math.round(video.duration);
         if (duration > 0) {
-          const progressPercentage = (currentTime / duration) * 100;
-          console.log(`Progress: ${progressPercentage.toFixed(2)}%`);
+          if (currentTime >= duration) {
+            art.pause();
+            if (currentEpisodeIndex < episodes?.length - 1 && autoNext) {
+              playNext(
+                episodes[currentEpisodeIndex + 1].id.match(/ep=(\d+)/)?.[1]
+              );
+            }
+          }
         }
       });
-
-      video.addEventListener("ended", () => {
-        console.log("Stream has ended.");
-      });
     } else {
-      art.notice.show("Unsupported playback format: m3u8");
+      console.log("Unsupported playback format: m3u8");
     }
   };
 
@@ -231,6 +228,8 @@ export default function Player({
       airplay: true,
       autoOrientation: true,
       fastForward: true,
+      aspectRatio:true,
+      subtitleOffset:true,
       plugins: [
         artplayerPluginHlsControl({
           quality: {
