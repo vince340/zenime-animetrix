@@ -60,9 +60,13 @@ function Producer() {
             </p>
           ) : (
             <div>
-              {producerInfo && producerInfo.length > 0 && (
+              {producerInfo && (
                 <CategoryCard
-                  label={id.charAt(0).toUpperCase() + id.slice(1) + " Anime"}
+                  label={
+                    (id.charAt(0).toUpperCase() + id.slice(1))
+                      .split("-")
+                      .join(" ") + " Anime"
+                  }
                   data={producerInfo}
                   showViewMore={false}
                   className={"mt-0"}
