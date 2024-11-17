@@ -25,7 +25,7 @@ function InfoItem({ label, value }) {
           {Array.isArray(value) ? (
             value.map((item, index) => (
               <Link
-                to={`/producer/${item}`}
+                to={`/producer/${item.split(" ").join("-")}`}
                 key={index}
                 className="cursor-pointer hover:text-[#ffbade]"
               >
@@ -35,7 +35,7 @@ function InfoItem({ label, value }) {
             ))
           ) : (
             <Link
-              to={`/producer/${value}`}
+              to={`/producer/${value.split(" ").join("-")}`}
               className="cursor-pointer hover:text-[#ffbade]"
             >
               {value}
