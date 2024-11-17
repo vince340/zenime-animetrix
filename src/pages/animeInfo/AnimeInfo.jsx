@@ -19,10 +19,21 @@ import Voiceactor from "@/src/components/voiceactor/Voiceactor";
 function InfoItem({ label, value }) {
   return (
     value && (
-      <p className="text-[14px] font-bold">
+      <div className="text-[14px] font-bold">
         {`${label}: `}
-        <span className="font-light">{value}</span>
-      </p>
+        <span className="font-light">
+          {Array.isArray(value) ? (
+            value.map((item, index) => (
+              <span key={index} className="cursor-pointer hover:text-[#ffbade]">
+                {item}
+                {index < value.length - 1 && ", "}
+              </span>
+            ))
+          ) : (
+            <span className="cursor-pointer hover:text-[#ffbade]">{value}</span>
+          )}
+        </span>
+      </div>
     )
   );
 }
@@ -55,7 +66,7 @@ function AnimeInfo({ random = false }) {
   const navigate = useNavigate();
   useEffect(() => {
     if (id === "404-not-found-page") {
-      console.log("404 got!")
+      console.log("404 got!");
       return null;
     } else {
       const fetchAnimeInfo = async () => {
@@ -278,11 +289,7 @@ function AnimeInfo({ random = false }) {
               { label: "Studios", value: info?.Studios },
               { label: "Producers", value: info?.Producers },
             ].map(({ label, value }, index) => (
-              <InfoItem
-                key={index}
-                label={label}
-                value={Array.isArray(value) ? value.join(", ") : value}
-              />
+              <InfoItem key={index} label={label} value={value} />
             ))}
             <p className="text-[14px] mt-4 custom-xl:hidden">
               {`${website_name} is the best site to watch `}
