@@ -24,13 +24,22 @@ function InfoItem({ label, value }) {
         <span className="font-light">
           {Array.isArray(value) ? (
             value.map((item, index) => (
-              <span key={index} className="cursor-pointer hover:text-[#ffbade]">
+              <Link
+                to={`/producer/${item}`}
+                key={index}
+                className="cursor-pointer hover:text-[#ffbade]"
+              >
                 {item}
                 {index < value.length - 1 && ", "}
-              </span>
+              </Link>
             ))
           ) : (
-            <span className="cursor-pointer hover:text-[#ffbade]">{value}</span>
+            <Link
+              to={`/producer/${value}`}
+              className="cursor-pointer hover:text-[#ffbade]"
+            >
+              {value}
+            </Link>
           )}
         </span>
       </div>
