@@ -55,10 +55,6 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-.LazyLoad {
-  opacity: 0;
-  transition: all 1s ease-in-out;
-}
 
 .is-visible {
   opacity: 1;
