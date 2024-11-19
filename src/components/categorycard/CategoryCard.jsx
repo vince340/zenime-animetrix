@@ -73,9 +73,9 @@ const CategoryCard = React.memo(
     const [hoverTimeout, setHoverTimeout] = useState(null);
     const { tooltipPosition, tooltipHorizontalPosition, cardRefs } =
       useToolTipPosition(hoveredItem, data);
-    const handleMouseEnter = (item) => {
+    const handleMouseEnter = (item, index) => {
       const timeout = setTimeout(() => {
-        setHoveredItem(item.id);
+        setHoveredItem(item.id + index);
         setShowPlay(true);
       }, 400);
       setHoverTimeout(timeout);
@@ -107,7 +107,9 @@ const CategoryCard = React.memo(
           {categoryPage && (
             <div
               className={`grid grid-cols-4 gap-x-3 gap-y-8 transition-all duration-300 ease-in-out ${
-                categoryPage ? "mt-8 max-[758px]:hidden" : ""
+                categoryPage && itemsToRender.firstRow.length > 0
+                  ? "mt-8 max-[758px]:hidden"
+                  : ""
               }`}
             >
               {itemsToRender.firstRow.map((item, index) => (
@@ -123,7 +125,7 @@ const CategoryCard = React.memo(
                     onMouseEnter={() => handleMouseEnter(item)}
                     onMouseLeave={handleMouseLeave}
                   >
-                    {hoveredItem === item.id && showPlay && (
+                    {hoveredItem === item.id + index && showPlay && (
                       <FontAwesomeIcon
                         icon={faPlay}
                         className="text-[40px] text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[10000]"
@@ -175,17 +177,18 @@ const CategoryCard = React.memo(
                         </div>
                       )}
                     </div>
-                    {hoveredItem === item.id && window.innerWidth > 1024 && (
-                      <div
-                        className={`absolute ${tooltipPosition} ${tooltipHorizontalPosition} z-[100000] transform transition-all duration-300 ease-in-out ${
-                          hoveredItem === item.id
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-2"
-                        }`}
-                      >
-                        <Qtip id={item.id} />
-                      </div>
-                    )}
+                    {hoveredItem === item.id + index &&
+                      window.innerWidth > 1024 && (
+                        <div
+                          className={`absolute ${tooltipPosition} ${tooltipHorizontalPosition} z-[100000] transform transition-all duration-300 ease-in-out ${
+                            hoveredItem === item.id + index
+                              ? "opacity-100 translate-y-0"
+                              : "opacity-0 translate-y-2"
+                          }`}
+                        >
+                          <Qtip id={item.id} />
+                        </div>
+                      )}
                   </div>
                   <Link
                     to={`/${item.id}`}
@@ -227,10 +230,10 @@ const CategoryCard = React.memo(
                 <div
                   className="w-full relative group hover:cursor-pointer"
                   onClick={() => navigate(`/watch/${item.id}`)}
-                  onMouseEnter={() => handleMouseEnter(item)}
+                  onMouseEnter={() => handleMouseEnter(item, index)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  {hoveredItem === item.id && showPlay && (
+                  {hoveredItem === item.id + index && showPlay && (
                     <FontAwesomeIcon
                       icon={faPlay}
                       className="text-[40px] text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[10000]"
@@ -274,17 +277,18 @@ const CategoryCard = React.memo(
                       </div>
                     )}
                   </div>
-                  {hoveredItem === item.id && window.innerWidth > 1024 && (
-                    <div
-                      className={`absolute ${tooltipPosition} ${tooltipHorizontalPosition} z-[100000] transform transition-all duration-300 ease-in-out ${
-                        hoveredItem === item.id
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-2"
-                      }`}
-                    >
-                      <Qtip id={item.id} />
-                    </div>
-                  )}
+                  {hoveredItem === item.id + index &&
+                    window.innerWidth > 1024 && (
+                      <div
+                        className={`absolute ${tooltipPosition} ${tooltipHorizontalPosition} z-[100000] transform transition-all duration-300 ease-in-out ${
+                          hoveredItem === item.id + index
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-2"
+                        }`}
+                      >
+                        <Qtip id={item.id} />
+                      </div>
+                    )}
                 </div>
                 <Link
                   to={`/${item.id}`}
