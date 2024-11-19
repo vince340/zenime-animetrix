@@ -30,9 +30,9 @@ function Topten({ data, className }) {
   const { tooltipPosition, tooltipHorizontalPosition, cardRefs } =
     useToolTipPosition(hoveredItem, currentData);
   const [hoverTimeout, setHoverTimeout] = useState(null);
-  const handleMouseEnter = (item) => {
+  const handleMouseEnter = (item, index) => {
     const timeout = setTimeout(() => {
-      setHoveredItem(item.id);
+      setHoveredItem(item.id+index);
     }, 400);
     setHoverTimeout(timeout);
   };
@@ -108,24 +108,25 @@ function Topten({ data, className }) {
                   alt={item.title}
                   className="w-[60px] h-[75px] rounded-md object-cover flex-shrink-0 cursor-pointer"
                   onClick={() => navigate(`/watch/${item.id}`)}
-                  onMouseEnter={() => handleMouseEnter(item)}
+                  onMouseEnter={() => handleMouseEnter(item, index)}
                   onMouseLeave={handleMouseLeave}
                 />
-                {hoveredItem === item.id && window.innerWidth > 1024 && (
-                  <div
-                    className={`absolute ${tooltipPosition} ${tooltipHorizontalPosition} ${
-                      tooltipPosition === "top-1/2"
-                        ? "translate-y-[50px]"
-                        : "translate-y-[-50px]"
-                    } z-[100000] transform transition-all duration-300 ease-in-out ${
-                      hoveredItem === item.id
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-2"
-                    }`}
-                  >
-                    <Qtip id={item.id} />
-                  </div>
-                )}
+                {hoveredItem === item.id + index &&
+                  window.innerWidth > 1024 && (
+                    <div
+                      className={`absolute ${tooltipPosition} ${tooltipHorizontalPosition} ${
+                        tooltipPosition === "top-1/2"
+                          ? "translate-y-[50px]"
+                          : "translate-y-[-50px]"
+                      } z-[100000] transform transition-all duration-300 ease-in-out ${
+                        hoveredItem === item.id + index
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-2"
+                      }`}
+                    >
+                      <Qtip id={item.id} />
+                    </div>
+                  )}
                 <div className="flex flex-col ml-4 space-y-2">
                   <Link
                     to={`/${item.id}`}

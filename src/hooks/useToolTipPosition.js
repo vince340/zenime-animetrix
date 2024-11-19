@@ -8,7 +8,9 @@ const useToolTipPosition = (hoveredItem, data) => {
 
   const updateToolTipPosition = () => {
     if (hoveredItem !== null) {
-      const refIndex = data.findIndex((item) => item.id === hoveredItem);
+      const refIndex = data.findIndex(
+        (item, index) => item.id + index === hoveredItem
+      );
       const ref = cardRefs.current[refIndex];
       if (ref) {
         const { top, height, left, width } = ref.getBoundingClientRect();

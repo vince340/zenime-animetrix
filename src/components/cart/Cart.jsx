@@ -18,9 +18,11 @@ function Cart({ label, data, path }) {
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const { tooltipPosition, tooltipHorizontalPosition, cardRefs } =
     useToolTipPosition(hoveredItem, data);
-  const handleMouseEnter = (item) => {
+  const handleMouseEnter = (item, index) => {
+    console.log("hovered");
+
     const timeout = setTimeout(() => {
-      setHoveredItem(item.id);
+      setHoveredItem(item.id + index);
     }, 300);
     setHoverTimeout(timeout);
   };
@@ -47,10 +49,10 @@ function Cart({ label, data, path }) {
                 alt={item.title}
                 className="flex-shrink-0 w-[60px] h-[75px] rounded-md object-cover cursor-pointer"
                 onClick={() => navigate(`/watch/${item.id}`)}
-                onMouseEnter={() => handleMouseEnter(item)}
+                onMouseEnter={() => handleMouseEnter(item, index)}
                 onMouseLeave={handleMouseLeave}
               />
-              {hoveredItem === item.id && window.innerWidth > 1024 && (
+              {hoveredItem === item.id + index && window.innerWidth > 1024 && (
                 <div
                   className={`absolute ${tooltipPosition} ${tooltipHorizontalPosition} 
             ${
@@ -60,7 +62,7 @@ function Cart({ label, data, path }) {
             } 
             z-[100000] transform transition-all duration-300 ease-in-out 
             ${
-              hoveredItem === item.id
+              hoveredItem === item.id + index
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-2"
             }`}

@@ -74,6 +74,8 @@ const CategoryCard = React.memo(
     const { tooltipPosition, tooltipHorizontalPosition, cardRefs } =
       useToolTipPosition(hoveredItem, data);
     const handleMouseEnter = (item, index) => {
+      const idx = data.findIndex((dataItem) => dataItem.id === item.id);
+      console.log(idx);
       const timeout = setTimeout(() => {
         setHoveredItem(item.id + index);
         setShowPlay(true);
