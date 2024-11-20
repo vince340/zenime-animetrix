@@ -16,30 +16,38 @@ import { useLanguage } from "@/src/context/LanguageContext";
 import { useHomeInfo } from "@/src/context/HomeInfoContext";
 import Voiceactor from "@/src/components/voiceactor/Voiceactor";
 
-function InfoItem({ label, value }) {
+function InfoItem({ label, value, isProducer = true }) {
   return (
     value && (
       <div className="text-[14px] font-bold">
         {`${label}: `}
         <span className="font-light">
           {Array.isArray(value) ? (
-            value.map((item, index) => (
-              <Link
-                to={`/producer/${item.split(" ").join("-")}`}
-                key={index}
-                className="cursor-pointer hover:text-[#ffbade]"
-              >
-                {item}
-                {index < value.length - 1 && ", "}
-              </Link>
-            ))
-          ) : (
+            value.map((item, index) =>
+              isProducer ? (
+                <Link
+                  to={`/producer/${item.split(" ").join("-")}`}
+                  key={index}
+                  className="cursor-pointer hover:text-[#ffbade]"
+                >
+                  {item}
+                  {index < value.length - 1 && ", "}
+                </Link>
+              ) : (
+                <span key={index} className="cursor-pointer">
+                  {item}
+                </span>
+              )
+            )
+          ) : isProducer ? (
             <Link
               to={`/producer/${value.split(" ").join("-")}`}
               className="cursor-pointer hover:text-[#ffbade]"
             >
               {value}
             </Link>
+          ) : (
+            <span className="cursor-pointer">{value}</span>
           )}
         </span>
       </div>
@@ -276,7 +284,12 @@ function AnimeInfo({ random = false }) {
               { label: "Status", value: info?.Status },
               { label: "MAL Score", value: info?.["MAL Score"] },
             ].map(({ label, value }, index) => (
-              <InfoItem key={index} label={label} value={value} />
+              <InfoItem
+                key={index}
+                label={label}
+                value={value}
+                isProducer={false}
+              />
             ))}
             {info?.Genres && (
               <div className="flex gap-x-2 py-2 custom-xl:border-t custom-xl:border-b custom-xl:border-white/20 max-[1200px]:border-none">
