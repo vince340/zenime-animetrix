@@ -74,8 +74,6 @@ const CategoryCard = React.memo(
     const { tooltipPosition, tooltipHorizontalPosition, cardRefs } =
       useToolTipPosition(hoveredItem, data);
     const handleMouseEnter = (item, index) => {
-      const idx = data.findIndex((dataItem) => dataItem.id === item.id);
-      console.log(idx);
       const timeout = setTimeout(() => {
         setHoveredItem(item.id + index);
         setShowPlay(true);
@@ -124,7 +122,7 @@ const CategoryCard = React.memo(
                   <div
                     className="w-full relative group hover:cursor-pointer"
                     onClick={() => navigate(`/watch/${item.id}`)}
-                    onMouseEnter={() => handleMouseEnter(item)}
+                    onMouseEnter={() => handleMouseEnter(item,index)}
                     onMouseLeave={handleMouseLeave}
                   >
                     {hoveredItem === item.id + index && showPlay && (

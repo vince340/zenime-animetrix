@@ -19,8 +19,6 @@ function Cart({ label, data, path }) {
   const { tooltipPosition, tooltipHorizontalPosition, cardRefs } =
     useToolTipPosition(hoveredItem, data);
   const handleMouseEnter = (item, index) => {
-    console.log("hovered");
-
     const timeout = setTimeout(() => {
       setHoveredItem(item.id + index);
     }, 300);
