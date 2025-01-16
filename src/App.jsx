@@ -29,10 +29,10 @@ function App() {
     <HomeInfoProvider>
       <div className="app-container">
         <main className="content">
-          // {!isSplashScreen && <Navbar />}
+          {/* {!isSplashScreen && <Navbar />}*/}
           <Navbar/>
           <Routes>
-          //  <Route path="/" element={<SplashScreen />} />
+          {/* <Route path="/" element={<SplashScreen />} />*/}
             <Route path="/" element={<Home />} />
             <Route path="/:id" element={<AnimeInfo />} />
             <Route path="/watch/:id" element={<Watch />} />
