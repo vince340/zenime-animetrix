@@ -19,26 +19,29 @@ import Producer from "./components/producer/Producer";
 function App() {
   const location = useLocation();
 
+  // Scroll to top on location change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
- // const isSplashScreen = location.pathname === "/";
+  // Check if the current route is for the splash screen
+  const isSplashScreen = location.pathname === "/";
 
   return (
     <HomeInfoProvider>
       <div className="app-container">
         <main className="content">
-          {/* {!isSplashScreen && <Navbar />}*/}
-          <Navbar/>
+          {/* {!isSplashScreen && <Navbar />} */}
+          <Navbar />
           <Routes>
-          {/* <Route path="/" element={<SplashScreen />} />*/}
+            {/* <Route path="/" element={<SplashScreen />} /> */}
             <Route path="/" element={<Home />} />
             <Route path="/:id" element={<AnimeInfo />} />
             <Route path="/watch/:id" element={<Watch />} />
             <Route path="/random" element={<AnimeInfo random={true} />} />
             <Route path="/404-not-found-page" element={<Error error="404" />} />
             <Route path="/error-page" element={<Error />} />
+            {/* Render category routes */}
             {categoryRoutes.map((path) => (
               <Route
                 key={path}
@@ -48,6 +51,7 @@ function App() {
                 }
               />
             ))}
+            {/* Render A to Z routes */}
             {azRoute.map((path) => (
               <Route
                 key={path}
@@ -57,9 +61,10 @@ function App() {
             ))}
             <Route path="/producer/:id" element={<Producer />} />
             <Route path="/search" element={<Search />} />
+            {/* Catch-all route for 404 */}
             <Route path="*" element={<Error error="404" />} />
           </Routes>
-          {!isSplashScreen && <Footer />}
+          <Footer />
         </main>
       </div>
     </HomeInfoProvider>
