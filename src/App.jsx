@@ -14,7 +14,7 @@ import "./App.css";
 import Search from "./pages/search/Search";
 import Watch from "./pages/watch/Watch";
 import Producer from "./components/producer/Producer";
-import SplashScreen from "./components/splashscreen/SplashScreen";
+//import SplashScreen from "./components/splashscreen/SplashScreen";
 
 function App() {
   const location = useLocation();
@@ -23,16 +23,17 @@ function App() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const isSplashScreen = location.pathname === "/";
+ // const isSplashScreen = location.pathname === "/";
 
   return (
     <HomeInfoProvider>
       <div className="app-container">
         <main className="content">
-          {!isSplashScreen && <Navbar />}
+          // {!isSplashScreen && <Navbar />}
+          <Navbar/>
           <Routes>
-            <Route path="/" element={<SplashScreen />} />
-            <Route path="/home" element={<Home />} />
+          //  <Route path="/" element={<SplashScreen />} />
+            <Route path="/" element={<Home />} />
             <Route path="/:id" element={<AnimeInfo />} />
             <Route path="/watch/:id" element={<Watch />} />
             <Route path="/random" element={<AnimeInfo random={true} />} />
