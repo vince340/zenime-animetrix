@@ -223,14 +223,14 @@ function Episodelist({
                       className={`flex items-center justify-center rounded-[3px] h-[30px] text-[13.5px] font-medium cursor-pointer group ${
                         item?.filler
                           ? isActive
-                            ? "bg-[#ffbade]"
+                            ? "bg-[#FF6300]"
                             : "bg-gradient-to-r from-[#5a4944] to-[#645a4b]"
                           : ""
                       } md:hover:bg-[#67686F] 
                           md:hover:text-white
                        ${
                          isActive
-                           ? "bg-[#ffbade] text-black"
+                           ? "bg-[#FF6300] text-black"
                            : "bg-[#35373D] text-gray-400"
                        } ${isSearched ? "glow-animation" : ""} `}
                       onClick={() => {
@@ -269,7 +269,7 @@ function Episodelist({
                         ? "bg-[#201F2D] text-gray-400"
                         : "bg-none"
                     } group md:hover:bg-[#2B2A42] ${
-                      isActive ? "text-[#ffbade] bg-[#2B2A42]" : ""
+                      isActive ? "text-[#FF6300] bg-[#2B2A42]" : ""
                     } ${isSearched ? "glow-animation" : ""}`}
                     onClick={() => {
                       if (episodeNumber) {
