@@ -64,7 +64,7 @@ function Navbar() {
               className="text-4xl font-bold max-[575px]:text-3xl cursor-pointer"
             >
               {logoTitle.slice(0, 3)}
-              <span className="text-[#FFBADE]">{logoTitle.slice(3, 4)}</span>
+              <span className="text-[#FF6300]">{logoTitle.slice(3, 4)}</span>
               {logoTitle.slice(4)}
             </Link>
           </div>
@@ -90,7 +90,7 @@ function Navbar() {
             >
               <FontAwesomeIcon
                 icon={item.icon}
-                className="text-[#ffbade] text-xl font-bold"
+                className="text-[#FF6300] text-xl font-bold"
               />
               <p className="text-[15px]">{item.label}</p>
             </Link>
@@ -101,7 +101,7 @@ function Navbar() {
                 <button
                   key={lang}
                   onClick={() => toggleLanguage(lang)}
-                  className={`px-1 py-[1px] text-xs font-bold ${index === 0 ? "rounded-l-[3px]" : "rounded-r-[3px]"} ${language === lang ? "bg-[#ffbade] text-black" : "bg-gray-600 text-white"}`}
+                  className={`px-1 py-[1px] text-xs font-bold ${index === 0 ? "rounded-l-[3px]" : "rounded-r-[3px]"} ${language === lang ? "bg-[#FF6300] text-black" : "bg-gray-600 text-white"}`}
                 >
                   {lang}
                 </button>
