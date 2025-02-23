@@ -10,7 +10,7 @@ function Footer() {
         className="w-full text-left max-[500px]:hidden"
       >
         <img
-          src="https://i.postimg.cc/SsKY6Y9f/2H76i57.png"
+          src="https://ibb.co/V0LbJHBz"
           alt={logoTitle}
           className="w-[200px] h-[100px]"
         />
@@ -37,7 +37,7 @@ function Footer() {
             <Link
               to={`az-list/${item === "All" ? "" : item}`}
               key={index}
-              className="text-lg bg-[#373646] px-2 rounded-md font-bold hover:text-black hover:bg-[#FFBADE] hover:cursor-pointer transition-all ease-out"
+              className="text-lg bg-[#373646] px-2 rounded-md font-bold hover:text-black hover:bg-[#FF6300] hover:cursor-pointer transition-all ease-out"
             >
               {item}
             </Link>
