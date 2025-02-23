@@ -69,7 +69,7 @@ function Banner({ item, index }) {
 
               <div className="flex space-x-3 w-fit">
                 {item.tvInfo.quality && (
-                  <div className="bg-[#ffbade] py-[1px] px-[6px] rounded-md w-fit text-[11px] font-bold h-fit">
+                  <div className="bg-[#FF6300] py-[1px] px-[6px] rounded-md w-fit text-[11px] font-bold h-fit">
                     {item.tvInfo.quality}
                   </div>
                 )}
