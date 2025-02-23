@@ -88,7 +88,7 @@ const CategoryCard = React.memo(
     return (
       <div className={`w-full ${className}`}>
         <div className="flex items-center justify-between">
-          <h1 className="font-bold text-2xl text-[#ffbade] max-[478px]:text-[18px] capitalize">
+          <h1 className="font-bold text-2xl text-[#FF6300] max-[478px]:text-[18px] capitalize">
             {label}
           </h1>
           {showViewMore && (
@@ -99,7 +99,7 @@ const CategoryCard = React.memo(
               <p className="text-white text-[12px] font-semibold h-fit leading-0 group-hover:text-[#ffbade] transition-all ease-out">
                 View more
               </p>
-              <FaChevronRight className="text-white text-[10px] group-hover:text-[#ffbade] transition-all ease-out" />
+              <FaChevronRight className="text-white text-[10px] group-hover:text-[#FF6300] transition-all ease-out" />
             </Link>
           )}
         </div>
