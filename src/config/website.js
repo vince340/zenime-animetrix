@@ -1,3 +1,3 @@
-const website_name = "AnimeTrix";
+const website_name = "Anime Focus (AF)";
 
 export default website_name;
